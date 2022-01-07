@@ -29,7 +29,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: 'Publish Build Output'
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/${{ env.APP_NAME }} -f netcoreapp3.1
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/${{ env.APP_NAME }} -f netcoreapp3.1,net4.8
 
     - name: 'Upload Artifacts'
       uses: actions/upload-artifact@v2

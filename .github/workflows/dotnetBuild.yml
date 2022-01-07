@@ -1,6 +1,9 @@
 name: .NET
 
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
 
 env:
@@ -23,7 +26,7 @@ jobs:
       run: dotnet restore
 
     - name: 'Build with Dotnet'
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release --no-restore
 
     - name: 'Publish Build Output'
       run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/${{ env.APP_NAME }}

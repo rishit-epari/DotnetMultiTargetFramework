@@ -8,7 +8,7 @@ on:
 
 env:
     APP_NAME: multiframework
-    DOTNET_VERSION: '5.0.x'
+    DOTNET_VERSION: '3.1.x'
 
 jobs:
   build:
@@ -21,6 +21,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1.1
       
     - name: Restore dependencies
       run: dotnet restore
@@ -29,7 +32,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: 'Publish Build Output'
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/${{ env.APP_NAME }} -f net4.8
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/${{ env.APP_NAME }} -f netcore3.1
 
     - name: 'Upload Artifacts'
       uses: actions/upload-artifact@v2
